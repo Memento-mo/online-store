@@ -1,0 +1,119 @@
+/* main {
+    height: 100vh;
+} */
+
+.card-deck {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#card-deck_tile {
+    display: flex;
+}
+
+#card-deck_list {
+    display: none;
+}
+
+.card_hover {
+    transition: 0.3s ease;
+}
+.card_hover:hover {
+    box-shadow: 0 0 40px 2px rgba(33, 150, 243, .5);
+    cursor: pointer;
+    border: 1px solid rgba(33, 150, 243, .2);
+}
+
+.products-flex {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    justify-content: space-between;
+}
+
+.products-flex-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-price__count {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.product-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.products-view {
+    align-items: center;
+}
+
+.products-view__title {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.products-view__icon {
+    margin-left: 10px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}
+
+.line {
+    height: 1px;
+    background: #343a40;
+    width: 100%;
+    opacity: 0.4;
+}
+
+.line_indents {
+    margin-top: 10px;
+}
+
+/* Мои стили для карточки */
+
+.card-text {
+    width: 102%;
+}
+
+.card-body-user {
+    padding: 1.25rem;
+}
+
+.card-img-top-user {
+    height: 100%;
+    width: 32%;
+}
+
+.card-deck .card-user {
+    display: flex;
+}
+
+.card-user {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: row;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.product-price-user {
+    display: flex;
+    position: absolute;
+    top: 155px;
+}
+
+.button-user {
+    position: relative;
+    left: 230px;
+}

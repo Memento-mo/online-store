@@ -1,0 +1,31 @@
+.footer {
+    padding: 20px 0 20px;
+    background: #343a40;
+    color: #fff;
+}
+
+.footer__title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.footer-contacts__address {
+    line-height: 24px;
+}
+.footer-contacts__address-title {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.footer-contacts__address-descr {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.footer_indents {
+    margin-left: 105px;
+    margin-top: 50px;
+}

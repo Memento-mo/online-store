@@ -1,0 +1,25 @@
+@import './_header.css';
+@import './_cards.css';
+@import './_filter.css';
+@import './_footer.css';
+
+li {
+    list-style: none;
+    cursor: pointer;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.sorts-item {
+    text-decoration: none;
+    color: #343a40;
+    font-size: 14px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.sorts-item:hover {
+    text-decoration: none;
+}
