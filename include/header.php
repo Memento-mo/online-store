@@ -25,7 +25,9 @@
 <div class="container">
     <div class="header-menu header-menu_text">
         <div class="header-logo">
-            <img src="./img/on_white_by_logaster.png" alt="logo">
+            <a href="index.php">
+                <img src="./img/on_white_by_logaster.png" alt="logo">
+            </a>
         </div>
         <div class="header-telephones">
             <div>+7(929)-594-56-07</div>
@@ -39,15 +41,20 @@
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown" id="dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Категории</a>
-                    <div class="dropdown-menu" id="dropdown-menu">
-                        <a class="dropdown-item" href="#">BCAA</a>
-                        <a class="dropdown-item" href="#">Гейнер</a>
-                        <a class="dropdown-item" href="#">Протеин</a>
-                        <a class="dropdown-item" href="#">Креатин</a>
-                        <a class="dropdown-item" href="#">Жиросжигатели</a>
-                        <a class="dropdown-item" href="#">Батончики</a>
+                    <div class="dropdown-menu">
+                        <?php 
+                            echo '
+                                <a class="dropdown-item" href="view_cat.php?type=BCAA">BCAA</a>
+                                <a class="dropdown-item" href="view_cat.php?type=gainer">Гейнер</a>
+                                <a class="dropdown-item" href="view_cat.php?type=protein">Протеин</a>
+                                <a class="dropdown-item" href="view_cat.php?type=creatine">Креатин</a>
+                                <a class="dropdown-item" href="view_cat.php?type=burners">Жиросжигатели</a>
+                                <a class="dropdown-item" href="view_cat.php?type=snickers">Батончики</a>
+                            ';
+                        ?>
+                       
                     </div>
                 </li>
                 <li class="nav-item">
@@ -56,17 +63,78 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Лидеры продаж</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Протеины</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Протеины</a>
+                    <div class="dropdown-menu">
+                        <?php 
+                            $result = mysql_query("SELECT * FROM category WHERE type='protein'", $link);
+
+                            if(mysql_num_rows($result) > 0) {
+                                $row = mysql_fetch_array($result);
+
+                                do {
+                                    echo '
+                                        <a href="view_cat.php?cat='.strtolower($row["brand"]).'&type='.$row["type"].'" class="dropdown-item">'.$row["brand"].'</a>   
+                                    ';
+
+                                } while ($row = mysql_fetch_array($result));
+                            };
+                        ?>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Гейнеры</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Гейнеры</a>
+                    <div class="dropdown-menu">
+                        <?php
+                            $result = mysql_query("SELECT * FROM category WHERE type='gainer'", $link);
+
+                            if(mysql_num_rows($result) > 0) {
+                                $row = mysql_fetch_array($result);
+
+                                do {
+                                    echo '
+                                        <a href="view_cat.php?cat='.strtolower($row["brand"]).'&type='.$row["type"].'" class="dropdown-item">'.$row["brand"].'</a>   
+                                    ';
+                                } while ($row = mysql_fetch_array($result));
+                            };
+                        ?>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">BCAA</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">BCAA</a>
+                    <div class="dropdown-menu">
+                        <?php
+                            $result = mysql_query("SELECT * FROM category WHERE type='BCAA'", $link);
+
+                            if(mysql_num_rows($result) > 0) {
+                                $row = mysql_fetch_array($result);
+
+                                do {
+                                    echo '
+                                        <a href="view_cat.php?cat='.strtolower($row["brand"]).'&type='.$row["type"].'" class="dropdown-item">'.$row["brand"].'</a>   
+                                    ';
+                                } while ($row = mysql_fetch_array($result));
+                            };
+                        ?>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Креатин</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Креатин</a>
+                    <div class="dropdown-menu">
+                        <?php
+                            $result = mysql_query("SELECT * FROM category WHERE type='creatine'", $link);
+
+                            if(mysql_num_rows($result) > 0) {
+                                $row = mysql_fetch_array($result);
+
+                                do {
+                                    echo '
+                                        <a href="view_cat.php?cat='.strtolower($row["brand"]).'&type='.$row["type"].'" class="dropdown-item">'.$row["brand"].'</a>   
+                                    ';
+                                } while ($row = mysql_fetch_array($result));
+                            };
+                        ?>
+                    </div>
                 </li>
             </ul>
         </div>

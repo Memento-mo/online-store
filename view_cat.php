@@ -1,5 +1,9 @@
 <?php 
     include("include/db_connect.php");
+    include("./functions/functions.php");
+
+    $cat = clear_string($_GET["cat"]);
+    $type = clear_string($_GET["type"]);
 
     $sorting = $_GET["sort"];
 
@@ -56,7 +60,18 @@
 
                     <div class="products-flex" id="card-deck_tile">
                     <?php
-                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' ORDER BY $sorting", $link);
+
+                        if (!empty($cat) && !empty($type)) {
+                            $querycat = "AND brand='$cat' AND type_of_products='$type'";
+                        } else {
+                            if (!empty($type)) {
+                                $querycat = "AND type_of_products='$type'";
+                            } else {
+                                $querycat = "";
+                            };
+                        };
+
+                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' $querycat  ORDER BY $sorting", $link);
 
                         if(mysql_num_rows($result) > 0) {
                             $row = mysql_fetch_array($result);
@@ -85,7 +100,7 @@
                     
                     <div class="products-flex-list" id="card-deck_list">
                     <?php
-                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' ORDER BY $sorting", $link);
+                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' $querycat ORDER BY $sorting", $link);
 
                         if(mysql_num_rows($result) > 0) {
                             $row = mysql_fetch_array($result);
@@ -115,15 +130,14 @@
                 </div>
             </div>
             
-        </section>
-        <section class="filter-params">
-            <?php 
-                include("./include/filter.php")
-            ?>
         </section>        
     </main>
 
-    
+    <section class="filter-params">
+        <?php 
+            include("./include/filter.php")
+        ?>
+    </section>
 
     <footer class="footer mt-3">
         <?php

@@ -1,6 +1,3 @@
-/* Получаю селекторы категорий  */
-const categories = document.querySelectorAll('.dropdown')
-
 /* Получаю все чекбоксы, для изменения их цвета при клике */
 const label = document.querySelectorAll('.container-checkbox')
 const checkbox = document.querySelectorAll('.checkbox')
@@ -9,22 +6,8 @@ const checkbox = document.querySelectorAll('.checkbox')
 const listIcon = document.getElementById("list-icon")
 const tileIcon = document.getElementById("tile-icon")
 
-const openDropdown = (item) => {
-    let menu = item.querySelector('.dropdown-menu')
 
-    item.classList.toggle('show')
-    menu.classList.toggle('show')    
-}
-
-const dropdowns = items => {
-    for(key in items) {
-        const element = items[key]
-        items[key].onclick = () => openDropdown(element)
-
-    }
-}
-
-function color() {
+const color = () => {
 	
 	for (let i = 0; i < label.length; i++) {
 		
@@ -38,7 +21,7 @@ function color() {
 
 }
 
-function addEvents(arr) {
+addEvents = arr => {
 	for (let i = 0; i < arr.length; i++) {
 		const element = arr[i];
 		if(element.type === 'checkbox') {
@@ -47,10 +30,9 @@ function addEvents(arr) {
 	}
 }
 
-function showListProducts() {
+const showListProducts = () => {
 	document.getElementById('card-deck_list').style.display = "flex"
 	document.getElementById('card-deck_tile').style.display = "none"
-	console.log(tileIcon.src)
 	if(tileIcon.src === 'http://shop-diplom.ru/img/icons/tile-black.svg') {
 		tileIcon.src = '../img/icons/tile.svg'
 	} 
@@ -58,7 +40,7 @@ function showListProducts() {
 	listIcon.src = '../img/icons/list-black.svg'
 }
 
-function showTileProducts() {
+const showTileProducts = () => {
 	document.getElementById('card-deck_list').style.display = "none"
 	document.getElementById('card-deck_tile').style.display = "flex"
 
@@ -72,6 +54,8 @@ function showTileProducts() {
 listIcon.addEventListener('click', showListProducts)
 tileIcon.addEventListener('click', showTileProducts)
 
-dropdowns(categories)
 addEvents(checkbox)
 
+$.document.ready(function() {
+	$('.dropdown-toggle').dropdown()
+})
