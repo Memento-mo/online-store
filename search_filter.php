@@ -4,23 +4,6 @@
 
     $cat = clear_string($_GET["cat"]);
     $type = clear_string($_GET["type"]);
-
-    $sorting = $_GET["sort"];
-
-    switch ($sorting) {
-        case "price-asc";
-            $sorting = "price ASC";
-            $sort_name = "По возрастанию цены";
-            break;
-        case "price-desc";
-            $sorting = "price DESC";
-            $sort_name = "По убыванию цены";
-            break;
-        default:
-            $sorting = "products_id DESC";
-            $sort_name = "Нет сортировки";
-            break;
-    }
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Поиск по параметрам</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -47,18 +30,16 @@
                     <div class="products-flex" id="card-deck_tile">
                     <?php
 
-                        if (!empty($cat) && !empty($type)) {
-                            $querycat = "AND brand='$cat' AND type_of_products='$type'";
-                        } else {
-                            if (!empty($type)) {
-                                $querycat = "AND type_of_products='$type'";
-                            } else {
-                                $querycat = "";
-                            };
+                        if ($_GET["brand"]) {
+                            $check_brand = implode(',', $_GET["brand"]);
                         };
 
-                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' $querycat  ORDER BY $sorting", $link);
+                        if(!empty($check_brand)) {
+                            $query_brand = " AND brand_id IN($check_brand)";
+                        };
 
+                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' $query_brand ORDER BY products_id DESC", $link);
+                        
                         if(mysql_num_rows($result) > 0) {
                             $row = mysql_fetch_array($result);
 
@@ -99,7 +80,7 @@
                     
                     <div class="products-flex-list" id="card-deck_list">
                     <?php
-                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' $querycat ORDER BY $sorting", $link);
+                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' $query_brand ORDER BY products_id DESC", $link);
 
                         if(mysql_num_rows($result) > 0) {
                             $row = mysql_fetch_array($result);

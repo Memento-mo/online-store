@@ -5,6 +5,8 @@ const checkbox = document.querySelectorAll('.checkbox')
 /* Получаю иконки вида : Tile и List */
 const listIcon = document.getElementById("list-icon")
 const tileIcon = document.getElementById("tile-icon")
+const listIconSecond = document.getElementById("list-icon-second")
+const tileIconSecond = document.getElementById("tile-icon-second")
 
 
 const color = () => {
@@ -30,29 +32,33 @@ addEvents = arr => {
 	}
 }
 
-const showListProducts = () => {
+const showListProducts = (tile, list) => {
 	document.getElementById('card-deck_list').style.display = "flex"
 	document.getElementById('card-deck_tile').style.display = "none"
-	if(tileIcon.src === 'http://shop-diplom.ru/img/icons/tile-black.svg') {
-		tileIcon.src = '../img/icons/tile.svg'
+
+	if(tile.src === 'http://shop-diplom.ru/img/icons/tile-black.svg') {
+		tile.src = '../img/icons/tile.svg'
 	} 
 	
-	listIcon.src = '../img/icons/list-black.svg'
+	list.src = '../img/icons/list-black.svg'
 }
 
-const showTileProducts = () => {
+const showTileProducts = (tile, list) => {
 	document.getElementById('card-deck_list').style.display = "none"
 	document.getElementById('card-deck_tile').style.display = "flex"
 
-	if(listIcon.src === 'http://shop-diplom.ru/img/icons/list-black.svg') {
-		listIcon.src = '../img/icons/list.svg'
+	if(list.src === 'http://shop-diplom.ru/img/icons/list-black.svg') {
+		list.src = '../img/icons/list.svg'
 	} 
 
-	tileIcon.src = '../img/icons/tile-black.svg'
+	tile.src = '../img/icons/tile-black.svg'
 }
 
-listIcon.addEventListener('click', showListProducts)
-tileIcon.addEventListener('click', showTileProducts)
+listIcon.addEventListener('click', () => showListProducts(tileIcon, listIcon))
+tileIcon.addEventListener('click', () => showTileProducts(tileIcon, listIcon))
+
+listIconSecond.addEventListener('click', () => showListProducts(tileIconSecond, listIconSecond))
+tileIconSecond.addEventListener('click', () => showTileProducts(tileIconSecond, listIconSecond))
 
 addEvents(checkbox)
 
