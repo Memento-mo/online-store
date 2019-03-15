@@ -2,6 +2,7 @@
 @import './_cards.css';
 @import './_filter.css';
 @import './_footer.css';
+@import './_registration.css';
 
 li {
     list-style: none;

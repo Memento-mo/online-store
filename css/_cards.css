@@ -78,6 +78,7 @@
 
 .card-text {
     width: 102%;
+    font-size: 13px;
 }
 
 .card-body-user {
@@ -116,4 +117,13 @@
 .button-user {
     position: relative;
     left: 230px;
+}
+
+.nav-point {
+    position: relative;
+}
+
+.pagination {
+    position: relative;
+    left: 21%;
 }

@@ -14,6 +14,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Доставка и оплата</a>
                 </li>
+                <li class="nav-item">
+                    <a href="../registration.php" class="nav-link">Регистрация</a>
+                </li>
             </ul>
         </div>
         <form class="form-inline" method="GET" action="serach.php?q=">
