@@ -13,3 +13,55 @@
 .navbar-dark .navbar-nav .nav-link {
     color: #fff;
 }
+
+.nav-item-custom {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    transition: 0.2s ease;
+    font-weight: 600;
+}
+
+.nav-item-custom:hover {
+    color: rgba(33, 150, 243);
+}
+
+.block-user {
+    padding: 8px 40px 8px 20px;
+    position: absolute;
+    background: #fff;
+    top: 50px;
+    left: 42%;
+    border: 1px solid rgba(33, 150, 243, .5);
+    box-shadow: 0px 1px 10px 1px rgba(33, 150, 243, .5);
+    border-radius: 3px;
+    display: none;
+}
+
+.block-user__profile {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(33, 150, 243);
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.block-user__profile:hover {
+    color: rgba(33, 150, 243, .5);
+}
+
+.block-user__quit {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(33, 150, 243);
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.block-user__quit:hover {
+    color: rgba(33, 150, 243, .5);
+}
+
+.block-user_active {
+    display: block;
+}

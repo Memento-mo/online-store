@@ -21,7 +21,7 @@
                 </li>
                 <?php
                     if($_SESSION['auth'] == 'yes_auth') {
-                        echo '<li class="nav-item"><a href="#" class="nav-link">Здравствуйте: '.$_SESSION['session_username'].'</a></li>';
+                        echo '<li class="nav-item nav-item-custom ml-1" id="block-user-name">Здравствуйте: '.$_SESSION['session_username'].'</li>';
                     } else {
                         echo '
                         <li class="nav-item">
@@ -34,7 +34,7 @@
                     };
                 ?>
             </ul>
-            <div class="block-user">
+            <div class="block-user" id="block-user-modal">
                 <div class="block-user__profile">Профиль</div>
                 <div class="block-user__quit">Выход</div>
             </div>
@@ -161,6 +161,5 @@
                 </li>
             </ul>
         </div>
-
     </div>
 </nav>

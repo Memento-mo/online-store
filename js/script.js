@@ -5,8 +5,9 @@ const checkbox = document.querySelectorAll('.checkbox')
 /* Получаю иконки вида : Tile и List */
 const listIcon = document.getElementById("list-icon")
 const tileIcon = document.getElementById("tile-icon")
-const listIconSecond = document.getElementById("list-icon-second")
-const tileIconSecond = document.getElementById("tile-icon-second")
+
+const loginBlockUser = document.getElementById('block-user')
+
 
 
 const color = () => {
@@ -54,14 +55,25 @@ const showTileProducts = (tile, list) => {
 	tile.src = '../img/icons/tile-black.svg'
 }
 
+
+// loginBlockUser.onclick = () => {
+// 	const blockProfile = document.getElementById('block-profile')
+	
+// 	blockProfile.classList.toggle('block-user_active')
+	
+// }
+
 listIcon.addEventListener('click', () => showListProducts(tileIcon, listIcon))
 tileIcon.addEventListener('click', () => showTileProducts(tileIcon, listIcon))
 
-listIconSecond.addEventListener('click', () => showListProducts(tileIconSecond, listIconSecond))
-tileIconSecond.addEventListener('click', () => showTileProducts(tileIconSecond, listIconSecond))
-
 addEvents(checkbox)
 
-$.document.ready(function() {
+$(document).ready(function() {
 	$('.dropdown-toggle').dropdown()
+
+		$("#block-user-name").click(() => {
+			$('#block-user-modal').fadeToggle()
+		})
+		 
 })
+
