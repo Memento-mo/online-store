@@ -1,5 +1,7 @@
 <?php 
     include("include/db_connect.php");
+    session_start();
+    include("./include/auth_cookie.php");
 
     $sorting = $_GET["sort"];
 

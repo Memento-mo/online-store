@@ -1,6 +1,6 @@
 <?php 
-    session_start();
     require_once("./include/db_connect.php");
+    session_start();
 
     if(isset($_SESSION["session_username"])) {
     // вывод "Session is set"; // в целях проверки
@@ -15,15 +15,27 @@
             $query =mysql_query("SELECT * FROM reg_users WHERE username='".$username."' AND password='".$password."'");
             $numrows=mysql_num_rows($query);
 
+            if ($_POST['remember'] == 'yes') {
+                setcookie('remember', $username.'+'.$password, time()+3600*24*32, '/');
+            }
+
             if($numrows!=0) {
                 while($row=mysql_fetch_assoc($query)) {
-                    $dbusername=$row['username'];
-                    $dbpassword=$row['password'];
+                    $dbusername = $row['username'];
+                    $dbpassword = $row['password'];
+                    $dbaddress = $row['address'];
+                    $dbphone = $row['phone'];
+                    $dbemail = $row['email'];
+                    $dbcountry = $row['country'];
                 }
                 if ($username == $dbusername && $password == $dbpassword) {
                     // старое место расположения
-                    //  session_start();
-                    $_SESSION['session_username'] = $username;	 
+                    $_SESSION['session_username'] = $username;
+                    $_SESSION['auth'] = 'yes_auth';
+                    $_SESSION['address'] = $dbaddress;
+                    $_SESSION['phone'] = $dbphone;
+                    $_SESSION['email'] = $dbemail;
+                    $_SESSION['country'] = $dbcountry;
                     /* Перенаправление браузера */
                     header("Location: intropage.php");
                 }

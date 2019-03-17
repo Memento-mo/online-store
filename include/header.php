@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    // include("./auth_cookie.php");
+?>
+
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -14,13 +19,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Доставка и оплата</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../registration.php" class="nav-link">Регистрация</a>
-                </li>
-                <li class="nav-item">
-                    <a href="../login.php" class="nav-link">Войти</a>
-                </li>
+                <?php
+                    if($_SESSION['auth'] == 'yes_auth') {
+                        echo '<li class="nav-item"><a href="#" class="nav-link">Здравствуйте: '.$_SESSION['session_username'].'</a></li>';
+                    } else {
+                        echo '
+                        <li class="nav-item">
+                            <a href="../registration.php" class="nav-link">Регистрация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../login.php" class="nav-link">Войти</a>
+                        </li>
+                        ';
+                    };
+                ?>
             </ul>
+            <div class="block-user">
+                <div class="block-user__profile">Профиль</div>
+                <div class="block-user__quit">Выход</div>
+            </div>
         </div>
         <form class="form-inline" method="GET" action="search.php?q=">
             <input class="form-control mr-sm-2" type="search" placeholder="Поиск по товару" aria-label="Search" name="q">

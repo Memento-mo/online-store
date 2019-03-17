@@ -30,6 +30,7 @@
        
 		<div id="welcome">
 			<h2 class="welcome">Добро пожаловать, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
+			<button class="btn btn-primary mt-3"><a class="reg-account" href="./index.php">Перейти в главное меню</button>
 			<button class="btn btn-danger mt-3"><a class="reg-account" href="logout.php">Выйти из системы</button>
 		</div>
 			
