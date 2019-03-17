@@ -3,6 +3,7 @@
 @import './_filter.css';
 @import './_footer.css';
 @import './_registration.css';
+@import './_intropage.css';
 
 li {
     list-style: none;

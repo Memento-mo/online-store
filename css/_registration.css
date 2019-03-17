@@ -98,3 +98,26 @@
     width: 600px;
     max-width: 100%;
 }
+
+.error {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.btn-size-danger {
+    width: 20%;
+}
+
+.btn {
+    padding: 0.575rem .75rem;
+}
+
+.reg-account {
+    text-decoration: none;
+    color: #fff;
+}
+
+.reg-account:hover {
+    color: #fff;
+    text-decoration: none;
+}

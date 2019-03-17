@@ -17,9 +17,12 @@
                 <li class="nav-item">
                     <a href="../registration.php" class="nav-link">Регистрация</a>
                 </li>
+                <li class="nav-item">
+                    <a href="../login.php" class="nav-link">Войти</a>
+                </li>
             </ul>
         </div>
-        <form class="form-inline" method="GET" action="serach.php?q=">
+        <form class="form-inline" method="GET" action="search.php?q=">
             <input class="form-control mr-sm-2" type="search" placeholder="Поиск по товару" aria-label="Search" name="q">
             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Поиск</button>
         </form>
@@ -28,8 +31,8 @@
 <div class="container">
     <div class="header-menu header-menu_text">
         <div class="header-logo">
-            <a href="index.php">
-                <img src="./img/on_white_by_logaster.png" alt="logo">
+            <a href="../index.php">
+                <img src="../img/on_white_by_logaster.png" alt="logo">
             </a>
         </div>
         <div class="header-telephones">

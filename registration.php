@@ -1,6 +1,5 @@
 <?php 
-    include("include/db_connect.php");
-    include("./functions/functions.php");
+    require_once("./include/db_connect.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,60 +20,93 @@
         ?>
     </header>
     <main class="container registration">
+        <?php
+        
+        if(isset($_POST["register"])){
+        
+            if(!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['phone']) && !empty($_POST['address']) && !empty($_POST['country'])) {
+                $full_name = htmlspecialchars($_POST['full_name']);
+                $email = htmlspecialchars($_POST['email']);
+                $username = htmlspecialchars($_POST['username']);
+                $password = htmlspecialchars($_POST['password']);
+                $address = htmlspecialchars($_POST['address']);
+                $phone = htmlspecialchars($_POST['phone']);
+                $country = htmlspecialchars($_POST['country']);
+                $query = mysql_query("SELECT * FROM reg_users WHERE username='".$username."'");
+                $numrows = mysql_num_rows($query);
+
+                if($numrows == 0) {
+
+                    $sql="INSERT INTO reg_users
+                        (full_name, email, username, password, address, phone, country)
+                        VALUES('$full_name','$email', '$username', '$password', '$address', '$phone', '$country')";
+
+                    $result=mysql_query($sql);
+
+                        if($result) {
+                            $message = "Аккаунт успешно создан!";
+                        } else {
+                            $message = "Не удалось проверить данные!";
+                        }
+                    
+                } else {
+                    $message = "Это имя уже используется, попробуйте другое.";
+                }
+            } else {
+                    $message = "Необходимо заполнить все поля";
+            }
+        }
+
+        if (!empty($message)) {
+                echo "<p class='error'>$message</p>";
+            };
+        ?>
+
         <div class="p-x-1 p-y-3">
-            <form class="card card-block m-x-auto bg-faded form-width needs-validation" id="form_reg" method="post" action="/reg/handler_reg.php" novalidate>
+            <div id="reg_message"></div>
+            <form class="card card-block m-x-auto bg-faded form-width" name="form_reg" id="form_reg" method="POST" action="./registration.php">
                 <legend class="m-b-1 text-xs-center mb-1">Регистрация</legend>
                 <div class="line mb-3"></div>
-                <div class="form-group input-group">
-                    <span class="has-float-label mb-3">
-                        <input class="form-control custom-form" id="first" type="text" placeholder="Имя"/>
-                        <label for="first">Имя</label>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </span>
-                    <span class="has-float-label">
-                        <input class="form-control custom-form" id="last" type="text" placeholder="Фамилия"/>
-                        <label for="last">Фамилия</label>
-                    </span>
-                    <span class="has-float-label">
-                        <input class="form-control custom-form" id="patronymic" type="text" placeholder="Отчество"/>
-                        <label for="patronymic">Отчество</label>
-                    </span>
-                </div>
+
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="login" type="text" placeholder="Логин"/>
-                    <label for="login">Логин</label>
+                    <input class="form-control mb-3 custom-form" id="full_name" name="full_name" type="text" placeholder="Полное имя" value=""/>
+                    <label for="full_name">Полное имя</label>
+                </div>
+
+                <div class="form-group has-float-label">
+                    <input class="form-control mb-3 custom-form" id="username" name="username" type="text" placeholder="Логин" value=""/>
+                    <label for="username">Логин</label>
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon mb-3">@</span>
                     <span class="has-float-label">
-                        <input class="form-control mb-3custom-form" id="email" type="email" placeholder="name@example.com"/>
+                        <input class="form-control mb-3custom-form" id="email" name="email" type="email" placeholder="name@example.com" value=""/>
                         <label for="email">E-mail</label>
                     </span>
                 </div>
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="phone" type="phone" placeholder="Мобильный телефон"/>
+                    <input class="form-control mb-3 custom-form" id="phone" name="phone" type="phone" placeholder="Мобильный телефон" value=""/>
                     <label for="phone">Мобильный телефон</label>
                 </div>
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="password" type="password" placeholder="••••••••"/>
+                    <input class="form-control mb-3 custom-form" id="password" name="password" type="password" placeholder="••••••••" value=""/>
                     <label for="password">Пароль</label>
                 </div>
                 <div class="form-group has-float-label ">
-                    <input class="form-control mb-3 custom-form" id="address" type="text" placeholder="••••••••"/>
+                    <input class="form-control mb-3 custom-form" id="address" name="address" type="text" placeholder="Адрес доставки" value=""/>
                     <label for="address">Адрес доставки</label>
                 </div>
                 <div class="form-group has-float-label mb-3">
-                    <select class="form-control custom-select" id="country">
+                    <select class="form-control custom-select" name="country" id="country">
                         <option selected>Россия</option>
                         <option>Казахстан</option>
                         <option>Белоруссия</option>
                     </select>
                     <label for="country">Страна</label>
                 </div>
-                <div class="text-xs-center">
-                    <button class="btn btn-block btn-primary btn-size" type="submit">Регистрация</button>
+                <div class="text-xs-center d-flex">
+                    <button class="btn btn-block btn-primary btn-size mr-2" type="submit" name="register">Регистрация</button>
+                    <button class="btn btn-danger btn-size-danger"><a href="./login.php" class="reg-account">Уже есть аккаунт? Войти!</a></button>
                 </div>
             </form>
         </div>
@@ -90,8 +122,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./js/validate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
     <script src="./js/jquery-form.js"></script>
+    <script src="./js/validate.js"></script>
 </body>
 </html>
