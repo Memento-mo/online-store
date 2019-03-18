@@ -40,7 +40,7 @@
             </div>
         </div>
         <form class="form-inline" method="GET" action="search.php?q=">
-            <input class="form-control mr-sm-2" type="search" placeholder="Поиск по товару" aria-label="Search" name="q">
+            <input class="form-control mr-sm-2" type="search" placeholder="Поиск по товару" aria-label="Search" value="<?php echo $search ?>" name="q">
             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Поиск</button>
         </form>
     </div>
@@ -79,12 +79,6 @@
                         ?>
                        
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Новинки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Лидеры продаж</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Протеины</a>

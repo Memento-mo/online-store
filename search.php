@@ -1,7 +1,10 @@
 <?php 
     include("include/db_connect.php");
+    include("./functions/functions.php");
     session_start();
     include("./include/auth_cookie.php");
+
+    $search = clear_string($_GET["q"]);
 
     $sorting = $_GET["sort"];
 
@@ -27,7 +30,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Поиск - <?php echo $search; ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -63,7 +66,7 @@
                         $num = 4;
                         $page = (int)$_GET['page'];
 
-                        $count = mysql_query("SELECT COUNT(*) FROM table_products WHERE visible='1'", $link);
+                        $count = mysql_query("SELECT COUNT(*) FROM table_products WHERE title LIKE '%$search%' and visible='1'", $link);
                         $temp = mysql_fetch_array($count);
 
                         if ($temp[0] > 0) {
@@ -83,72 +86,77 @@
                             $query_start_num = " LIMIT $start, $num";
                         }
 
-                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' ORDER BY $sorting $query_start_num", $link);
+                        if ($temp[0] > 0) {
 
-                        if(mysql_num_rows($result) > 0) {
-                            $row = mysql_fetch_array($result);
+                            $result = mysql_query("SELECT * FROM table_products WHERE title LIKE '%$search%' and visible='1' ORDER BY $sorting $query_start_num", $link);
 
-                            do {
-                                echo '
-                                    <div class="mb-3 mt-3">    
-                                        <div class="card card_hover" style="width: 18rem;">
-                                            <img class="card-img-top card_size" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">'.$row["title"].'</h5>
-                                                <p class="card-text">'.$row["mini_description"].'</p>
-                                                <div class="product-price">
-                                                    <div class="product-price__count">'.$row["price"].' руб.</div>
-                                                    <a href="#" class="btn btn-primary">В корзину</a>
+                            if(mysql_num_rows($result) > 0) {
+                                $row = mysql_fetch_array($result);
+
+                                do {
+                                    echo '
+                                        <div class="mb-3 mt-3">    
+                                            <div class="card card_hover" style="width: 18rem;">
+                                                <img class="card-img-top card_size" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">'.$row["title"].'</h5>
+                                                    <p class="card-text">'.$row["mini_description"].'</p>
+                                                    <div class="product-price">
+                                                        <div class="product-price__count">'.$row["price"].' руб.</div>
+                                                        <a href="#" class="btn btn-primary">В корзину</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ';
-
-                            } while ($row = mysql_fetch_array($result));
-                        };
-
-                        if ($page != 1) $pstr_prev = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 1).'">Previous</a></li>';
-                        if ($page != $total) $pstr_next = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 1).'">Next</a></li>';
-
-                        // Формируем ссылки со страницами
-                        if ($page - 5 > 0) $page5left = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 5).'">'.($page - 5).'</a></li>';
-                        if ($page - 5 > 0) $page4left = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 4).'">'.($page - 4).'</a></li>';
-                        if ($page - 5 > 0) $page3left = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 3).'">'.($page - 3).'</a></li>';
-                        if ($page - 5 > 0) $page2left = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 2).'">'.($page - 2).'</a></li>';
-                        if ($page - 5 > 0) $page1left = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 1).'">'.($page - 1).'</a></li>';
-
-                        if ($page + 5 <= $total) $page5right = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 5).'">'.($page + 5).'</a></li>';
-                        if ($page + 5 <= $total) $page4right = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 4).'">'.($page + 4).'</a></li>';
-                        if ($page + 5 <= $total) $page3right = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 3).'">'.($page + 3).'</a></li>';
-                        if ($page + 5 <= $total) $page2right = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 2).'">'.($page + 2).'</a></li>';
-                        if ($page + 5 <= $total) $page1right = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 1).'">'.($page + 1).'</a></li>';
-                        
-
-                        if ($page + 1 < $total) {
-                            $strtotal = '<li class="page-item"><p class="nav-point page-link">...</p></li><li class="page-item"><a class="page-link" href="index.php?page='.$total.'">'.$total.'</a></li>';
-                        } else {
-                            $strtotal = '';
-                        }
-
-                        if ($total > 1) {
-                            echo '
-                                <nav class="mt-5">
-                                    <ul class="pagination">
                                     ';
-                            echo        $pstr_prev.$page5left.$page4left.$page3left.$page2left.$page1left."<li class='page-item'><a class='pstr-active page-link' href='index.php?type='.$type.'page=".$page."'>".$page."</a></li>".$page1right.$page2right.$page3right.$page4right.$page5right.$strtotal.$pstr_next;
-                            echo '
-                                    </ul>
-                                </nav>
-                                ';
+
+                                } while ($row = mysql_fetch_array($result));
+                            };
+
+                            if ($page != 1) $pstr_prev = '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 1).'">Previous</a></li>';
+                            if ($page != $total) $pstr_next = '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 1).'">Next</a></li>';
+
+                            // Формируем ссылки со страницами
+                            if ($page - 5 > 0) $page5left = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page - 5).'">'.($page - 5).'</a></li>';
+                            if ($page - 5 > 0) $page4left = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page - 4).'">'.($page - 4).'</a></li>';
+                            if ($page - 5 > 0) $page3left = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page - 3).'">'.($page - 3).'</a></li>';
+                            if ($page - 5 > 0) $page2left = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page - 2).'">'.($page - 2).'</a></li>';
+                            if ($page - 5 > 0) $page1left = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page - 1).'">'.($page - 1).'</a></li>';
+
+                            if ($page + 5 <= $total) $page5right = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page + 5).'">'.($page + 5).'</a></li>';
+                            if ($page + 5 <= $total) $page4right = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page + 4).'">'.($page + 4).'</a></li>';
+                            if ($page + 5 <= $total) $page3right = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page + 3).'">'.($page + 3).'</a></li>';
+                            if ($page + 5 <= $total) $page2right = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page + 2).'">'.($page + 2).'</a></li>';
+                            if ($page + 5 <= $total) $page1right = '<li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.($page + 1).'">'.($page + 1).'</a></li>';
                             
+
+                            if ($page + 1 < $total) {
+                                $strtotal = '<li class="page-item"><p class="nav-point page-link">...</p></li><li class="page-item"><a class="page-link" href="search.php?q='.$search.'&page='.$total.'">'.$total.'</a></li>';
+                            } else {
+                                $strtotal = '';
+                            }
+
+                            if ($total > 1) {
+                                echo '
+                                    <nav class="mt-5">
+                                        <ul class="pagination">
+                                        ';
+                                echo        $pstr_prev.$page5left.$page4left.$page3left.$page2left.$page1left."<li class='page-item'><a class='pstr-active page-link' href='search.php?q=".$search."&page=".$page."'>".$page."</a></li>".$page1right.$page2right.$page3right.$page4right.$page5right.$strtotal.$pstr_next;
+                                echo '
+                                        </ul>
+                                    </nav>
+                                    ';
+                                
+                            }
+                        } else {
+                            echo '<p class="not-found mt-2">Ничего не найдено</p>';
                         }
                     ?>
                     </div>
                     
                     <div class="products-flex-list" id="card-deck_list">
                     <?php
-                        $result = mysql_query("SELECT * FROM table_products WHERE visible='1' ORDER BY $sorting $query_start_num", $link);
+                        $result = mysql_query("SELECT * FROM table_products WHERE title LIKE '%$search%' and visible='1' ORDER BY $sorting $query_start_num", $link);
 
                         if(mysql_num_rows($result) > 0) {
                             $row = mysql_fetch_array($result);

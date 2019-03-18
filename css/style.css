@@ -29,3 +29,8 @@ body {
 main {
     min-height: calc(100vh - 80px);
 }
+
+.not-found {
+    font-size: 18px;
+    font-weight: 600;
+}
