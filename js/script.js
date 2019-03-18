@@ -72,8 +72,21 @@ $(document).ready(function() {
 	$('.dropdown-toggle').dropdown()
 
 		$("#block-user-name").click(() => {
-			$('#block-user-modal').fadeToggle()
+			$('#block-user-modal').fadeToggle(100)
 		})
-		 
+	
+	$('#logout').click(() => {
+		$.ajax({
+			type: "POST",
+			url: "../login.php",
+			dataType: "html",
+			cache: false,
+			success: (data) => {
+				if (data === 'logout') {
+					location.reload()
+				}
+			}
+		})
+	})
 })
 

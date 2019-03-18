@@ -53,8 +53,6 @@
 .block-user__quit {
     font-size: 14px;
     font-weight: 600;
-    color: rgba(33, 150, 243);
-    transition: 0.2s ease;
     cursor: pointer;
 }
 
@@ -62,6 +60,12 @@
     color: rgba(33, 150, 243, .5);
 }
 
-.block-user_active {
-    display: block;
+.block-user_link {
+    color: rgba(33, 150, 243);
+    transition: 0.2s ease;
+}
+
+.block-user_link:hover {
+    text-decoration: none;
+    color: rgba(33, 150, 243, .5);
 }

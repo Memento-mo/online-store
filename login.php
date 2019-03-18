@@ -21,6 +21,7 @@
 
             if($numrows!=0) {
                 while($row=mysql_fetch_assoc($query)) {
+                    $dbfullnname = $row['full_name'];
                     $dbusername = $row['username'];
                     $dbpassword = $row['password'];
                     $dbaddress = $row['address'];
@@ -31,11 +32,13 @@
                 if ($username == $dbusername && $password == $dbpassword) {
                     // старое место расположения
                     $_SESSION['session_username'] = $username;
+                    $_SESSION['full_name'] = $dbfullnname;
                     $_SESSION['auth'] = 'yes_auth';
                     $_SESSION['address'] = $dbaddress;
                     $_SESSION['phone'] = $dbphone;
                     $_SESSION['email'] = $dbemail;
                     $_SESSION['country'] = $dbcountry;
+                    $_SESSION['password'] = $dbpassword;
                     /* Перенаправление браузера */
                     header("Location: intropage.php");
                 }

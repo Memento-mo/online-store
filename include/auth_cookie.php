@@ -20,6 +20,8 @@
             $_SESSION['phone'] = $dbphone;
             $_SESSION['email'] = $dbemail;
             $_SESSION['country'] = $dbcountry;
+            $_SESSION['password'] = $dbpassword;
+            $_SESSION['full_name'] = $dbfullname;
         };
     }
 ?>

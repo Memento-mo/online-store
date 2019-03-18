@@ -70,37 +70,37 @@
             <div id="reg_message"></div>
             <form class="card card-block m-x-auto bg-faded form-width" name="form_reg" id="form_reg" method="POST" action="./registration.php">
                 <legend class="m-b-1 text-xs-center mb-1">Регистрация</legend>
-                <div class="line mb-3"></div>
+                <div class="line mb-5"></div>
 
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="full_name" name="full_name" type="text" placeholder="Полное имя" value=""/>
+                    <input class="form-control mb-2 custom-form" id="full_name" name="full_name" type="text" placeholder="Полное имя" value=""/>
                     <label for="full_name">Полное имя</label>
                 </div>
 
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="username" name="username" type="text" placeholder="Логин" value=""/>
+                    <input class="form-control mb-2 custom-form" id="username" name="username" type="text" placeholder="Логин" value=""/>
                     <label for="username">Логин</label>
                 </div>
                 <div class="form-group input-group">
-                    <span class="input-group-addon mb-3">@</span>
+                    <span class="input-group-addon mb-2">@</span>
                     <span class="has-float-label">
-                        <input class="form-control mb-3custom-form" id="email" name="email" type="email" placeholder="name@example.com" value=""/>
+                        <input class="form-control mb-2 custom-form" id="email" name="email" type="email" placeholder="name@example.com" value=""/>
                         <label for="email">E-mail</label>
                     </span>
                 </div>
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="phone" name="phone" type="phone" placeholder="Мобильный телефон" value=""/>
+                    <input class="form-control mb-2 custom-form" id="phone" name="phone" type="phone" placeholder="Мобильный телефон" value=""/>
                     <label for="phone">Мобильный телефон</label>
                 </div>
                 <div class="form-group has-float-label">
-                    <input class="form-control mb-3 custom-form" id="password" name="password" type="password" placeholder="••••••••" value=""/>
+                    <input class="form-control mb-2 custom-form" id="password" name="password" type="password" placeholder="••••••••" value=""/>
                     <label for="password">Пароль</label>
                 </div>
                 <div class="form-group has-float-label ">
-                    <input class="form-control mb-3 custom-form" id="address" name="address" type="text" placeholder="Адрес доставки" value=""/>
+                    <input class="form-control mb-2 custom-form" id="address" name="address" type="text" placeholder="Адрес доставки" value=""/>
                     <label for="address">Адрес доставки</label>
                 </div>
-                <div class="form-group has-float-label mb-3">
+                <div class="form-group has-float-label mb-2">
                     <select class="form-control custom-select" name="country" id="country">
                         <option selected>Россия</option>
                         <option>Казахстан</option>

@@ -4,6 +4,7 @@
 @import './_footer.css';
 @import './_registration.css';
 @import './_intropage.css';
+@import './_profile.css';
 
 li {
     list-style: none;

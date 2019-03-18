@@ -35,8 +35,8 @@
                 ?>
             </ul>
             <div class="block-user" id="block-user-modal">
-                <div class="block-user__profile">Профиль</div>
-                <div class="block-user__quit">Выход</div>
+                <div class="block-user__profile"><a href="../profile.php" class="block-user_link">Профиль</a></div>
+                <div class="block-user__quit"><a href="../logout.php" id="logout" class="block-user_link">Выход</a></div>
             </div>
         </div>
         <form class="form-inline" method="GET" action="search.php?q=">
