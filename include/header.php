@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // include("./auth_cookie.php");
 ?>
 
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">

@@ -16,6 +16,30 @@
             $delete = mysql_query("DELETE FROM cart WHERE cart_id = '$id' AND cart_ip = '{$_SERVER['REMOTE_ADDR']}'", $link);
             break;
     }
+
+    if (isset($_POST["next_submit"])) {
+        $_SESSION["order_delivery"] = $_POST["order_delivery"];
+        $_SESSION["order_full_name"] = $_POST["order_full_name"];
+        $_SESSION["order_email"] = $_POST["order_email"];
+        $_SESSION["order_phone"] = $_POST["order_phone"];
+        $_SESSION["order_address"] = $_POST["order_address"];
+        $_SESSION["order_note"] = $_POST["order_note"];
+        $_SESSION["order_country"] = $_POST["order_country"];
+
+        header("Location: cart.php?action=completion");
+    }
+
+    $result = mysql_query("SELECT * FROM cart, table_products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND table_products.products_id = cart.cart_id_products", $link);
+
+    if (mysql_num_rows($result) > 0) {
+        $row = mysql_fetch_array($result);
+
+        do {
+            $int = $row["cart_price"] * $row["cart_count"];
+        } while ($row = mysql_fetch_array($result));
+
+        $total_price = $int;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +93,7 @@
                                 <div class="cart-steps__step">Шаг 1 из 3</div>
                                 <a href="cart.php?action=clear"><button class="btn btn-danger">Очистить</button></a>
                             </div>
+                            <div class="line mt-2 mb-2"></div>
                         </div>
                     ';
 
@@ -78,8 +103,7 @@
                             $row = mysql_fetch_array($result);
 
                             echo '
-                            <div class="cart-cap cart-container mt-4">
-                                <div class="line mb-2"></div>
+                            <div class="cart-cap cart-container mt-2">
                                 <div class="cart-cap__titles d-flex justify-content-around">
                                     <div class="cart-cap__titles-title">
                                         Изображение
@@ -166,8 +190,96 @@
                                 <div class="cart-steps__step">Шаг 2 из 3</div>
                                 <a href="cart.php?action=clear"><button class="btn btn-danger">Очистить</button></a>
                             </div>
+                            <div class="line mt-2 mb-4"></div>
                         </div>
                     ';
+
+                        if($_SESSION["order_delivery"] == 'По почте') $check1 = "checked";
+                        if($_SESSION["order_delivery"] == 'Курьером') $check2 = "checked";
+                        if($_SESSION["order_delivery"] == 'Самовывоз') $check3 = "checked";
+
+                    echo '
+                        <div class="cart-container">
+                            <form method="POST">
+                                <div class="delivery-method">
+                                    <div class="delivery-title mt-2">Способ доставки:</div>
+                                    <div class="line mt-1 mb-2"></div>
+
+                                    <div class="forms__inputs">
+                                        <div class="forms__inputs__el">
+                                            <input type="radio" id="contactChoice1"
+                                                name="order_delivery" class="order_delivery radio" value="По почте" '.$check1.'>
+                                            <label for="contactChoice1">По почте</label>
+                                        </div>
+                                        
+                                        <div class="forms inputs__el radio_indents">
+                                            <input type="radio" id="contactChoice2"
+                                                name="order_delivery" class="order_delivery radio radio_indents" value="Курьером" '.$check2.'>
+                                            <label for="contactChoice2">Курьером</label>
+                                        </div>
+
+                                        <div class="forms inputs__el radio_indents">
+                                            <input type="radio" id="contactChoice3"
+                                                name="order_delivery"class="order_delivery radio radio_indents" value="Самовывоз" '.$check3.'>
+                                            <label for="contactChoice3">Самовывоз</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                        ';          
+
+                        if ($_SESSION['auth'] != 'yes_auth') {
+                            echo '                  
+                                <div class="info-delivery">
+                                    <div class="delivery-title mt-2">Информация для доставки:</div>
+                                    <div class="line mt-2"></div>
+
+                                    <div class="form-group has-float-label mt-3">
+                                        <input class="form-control mb-2 custom-form" id="order_full_name" name="order_full_name" type="text" placeholder="Полное имя" value="'.$_SESSION["order_full_name"].'"/>
+                                        <label for="order_full_name">Полное имя</label>
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon">@</span>
+                                        <span class="has-float-label">
+                                            <input class="form-control custom-form" id="order_email" name="order_email" type="email" placeholder="name@example.com" value="'.$_SESSION["order_email"].'"/>
+                                            <label for="order_email">E-mail</label>
+                                        </span>
+                                    </div>
+                                    <div class="form-group has-float-label">
+                                        <input class="form-control mb-2 custom-form" id="order_phone" name="order_phone" type="phone" placeholder="Мобильный телефон" value="'.$_SESSION["order_phone"].'"/>
+                                        <label for="order_phone">Мобильный телефон</label>
+                                    </div>
+                                    <div class="form-group has-float-label ">
+                                        <input class="form-control mb-2 custom-form" id="order_address" name="order_address" type="text" placeholder="Адрес доставки" value="'.$_SESSION["order_address"].'"/>
+                                        <label for="order_address">Адрес доставки</label>
+                                    </div>
+                                    <div class="form-group has-float-label mb-2">
+                                        <select class="form-control custom-select" name="order_country" id="order_country">
+                                            <option selected>'.$_SESSION["order_country"].'</option>
+                                            <option>Россия</option>
+                                            <option>Казахстан</option>
+                                            <option>Белоруссия</option>
+                                        </select>
+                                        <label for="order_country">Страна</label>
+                                    </div>
+                                </div>
+                      
+                                ';
+                            }
+                            
+                        echo '
+                            <div class="form-group mt-3">
+                                <label for="order_information">Примечание<br>Уточните информацию о заказе.</label>
+                                <textarea class="form-control" id="order_information" rows="5" name="order_note">'.$_SESSION["order_note"].'</textarea>
+                            </div>
+                            <p style="text-align: right;">
+                                <button class="btn btn-outline-primary" type="submit" id="btn-send" name="next_submit">Далее</button>
+                            </p>
+                        </form>
+                    </div>
+                    ';
+                            
+                        
                     break;
                 case 'completion':
                     echo '
@@ -197,8 +309,44 @@
                                 <div class="cart-steps__step">Шаг 3 из 3</div>
                                 <a href="cart.php?action=clear"><button class="btn btn-danger">Очистить</button></a>
                             </div>
-                        </div>
+                            <div class="line mt-2"></div>
+                       
                     ';
+
+                    if($_SESSION['auth'] == 'yes_auth') {
+                        echo '
+                            <div class="delivery-title mt-2">Конечная информация:</div>
+                            <ul class="delivery-list mt-2">
+                                <li class="delivery-list_item"><span class="completion-title">Способ доставки:</span>  '.$_SESSION['order_delivery'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Email:</span>  '.$_SESSION['email'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">ФИО:</span>  '.$_SESSION['full_name'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Адрес доставки:</span>  '.$_SESSION['address'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Телефон:</span>  '.$_SESSION['phone'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Примечание:</span>  '.$_SESSION['order_note'].'</li>
+                            </ul>
+                        ';
+                    } else {
+                        echo '
+                            <div class="delivery-title mt-2">Конечная информация:</div>
+                            <ul class="delivery-list mt-2">
+                                <li class="delivery-list_item"><span class="completion-title">Способ доставки:</span>  '.$_SESSION['order_delivery'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Email:</span>  '.$_SESSION['order_email'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">ФИО:</span>  '.$_SESSION['order_full_name'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Адрес доставки:</span>  '.$_SESSION['order_address'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Телефон:</span>  '.$_SESSION['order_phone'].'</li>
+                                <li class="delivery-list_item"><span class="completion-title">Примечание:</span>  '.$_SESSION['order_note'].'</li>
+                            </ul>
+                        ';
+                    }
+
+                    echo '
+                        <div class="total-price">
+                            <div class="cart-total__price mb-3">Итого: '.$total_price.' руб.</div>
+                            <button class="btn btn-success">Оплатить</button>
+                        </div>
+                    </div>
+                    ';
+
                     break;
                 default:
                     echo '
