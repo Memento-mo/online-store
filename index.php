@@ -156,7 +156,7 @@
                             do {
                                 echo '
                                     <div class="mb-3 mt-3">    
-                                        <div class="card-user card_hover" style="width: 44rem; height: 209px">
+                                        <div class="card-user card_hover card-size">
                                             <img class="card-img-top card-img-top-user" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
                                             <div class="card-body-user">
                                                 <h5 class="card-title">'.$row["title"].'</h5>

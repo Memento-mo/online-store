@@ -69,3 +69,23 @@
     text-decoration: none;
     color: rgba(33, 150, 243, .5);
 }
+
+.cart-image__img {
+    width: 30px;
+    height: 30px;
+}
+
+.cart-link {
+    color: #fff;
+    margin-left: 10px;
+}
+
+.cart-link:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.cart:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

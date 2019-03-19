@@ -5,6 +5,7 @@
 @import './_registration.css';
 @import './_intropage.css';
 @import './_profile.css';
+@import './_cart.css';
 
 li {
     list-style: none;

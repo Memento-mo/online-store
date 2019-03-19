@@ -1,0 +1,95 @@
+.cart-container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.cart-info__item-arrow img {
+    width: 35px;
+    height: 15px;
+}
+
+.cart-info__item-title {
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cart-info__item-title a {
+    transition: 0.1s ease;
+}
+
+.cart-info__item-title a:hover {
+    text-decoration: none;
+}
+
+.cart-steps__step {
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.cart-active {
+    color: #343a40;
+}
+
+.cart-cap__titles-title {
+    color: #343a40;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cart-size {
+    max-width: 50rem; 
+    width: 100%;
+    height: 218px;
+}
+
+.cart-text_size {
+    max-width: 250px;
+    width: 100%;
+}
+
+.card-count {
+    text-align: center;
+}
+
+.count-input {
+    max-width: 30px;
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid #343a40;
+    text-align: center;
+    padding: 2px;
+}
+
+.count-input:focus {
+    outline: none;
+}
+
+.product-price__count_indents {
+    margin-left: 100px;
+}
+
+.card-count_indents {
+    margin-left: 27px;
+}
+
+.cart-delete {
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.cart-total__price {
+    color: #343a40;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.cart-total {
+    flex-direction: column;
+}

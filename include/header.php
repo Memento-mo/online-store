@@ -62,7 +62,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Категории</a>
@@ -154,6 +154,15 @@
                     </div>
                 </li>
             </ul>
+
+            <div class="cart d-flex align-items-center">
+                <div class="cart-image">
+                    <img src="../img/icons/cart.svg" alt="cart" class="cart-image__img">
+                </div>
+                <div class="cart-title">
+                    <a href="../cart.php?action=oneclick" class="cart-link">Корзина пустая</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
