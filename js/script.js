@@ -88,7 +88,6 @@ $(document).ready(function() {
 		let orderEmail = $('#order_email').val();
 		let orderPhone = $('#order_phone').val();
 		let orderAddress = $('#order_address').val();
-		let orderCountry = $('#order_country').val();
 
 		if(!$('.order_delivery').is(':checked')) {
 			send_order_delivery = '0';
@@ -147,34 +146,118 @@ $(document).ready(function() {
 			cache: false
 		})
 
-		const funGroupPrice = intPrice => {
-			let resultTotal = String(intPrice);
-			let lenStr = resultTotal.length;
+		
+	})
 
-			switch(lenStr) {
-				case 4: {
-					groupPrice = `${resultTotal.substring(0,1)} ${resultTotal.substring(1,4)}`;
-					break;
-				}
-				case 5: {
-					groupPrice = `${resultTotal.substring(0,2)} ${resultTotal.substring(2,5)}`;
-					break;
-				}
-				case 6: {
-					groupPrice = `${resultTotal.substring(0,3)} ${resultTotal.substring(3,6)}`;
-					break;
-				}
-				case 7: {
-					groupPrice = `${resultTotal.substring(0,1)} ${resultTotal.substring(1,4)} ${resultTotal.substring(4,7)}`;
-					break;
-				}
-				default: {
-					groupPrice = resultTotal;
-				}
+	function funGroupPrice(intPrice) {
+		let resultTotal = String(intPrice);
+		let lenStr = resultTotal.length;
+
+		switch(lenStr) {
+			case 4: {
+				groupPrice = `${resultTotal.substring(0,1)} ${resultTotal.substring(1,4)}`;
+				break;
 			}
-			return groupPrice;
+			case 5: {
+				groupPrice = `${resultTotal.substring(0,2)} ${resultTotal.substring(2,5)}`;
+				break;
+			}
+			case 6: {
+				groupPrice = `${resultTotal.substring(0,3)} ${resultTotal.substring(3,6)}`;
+				break;
+			}
+			case 7: {
+				groupPrice = `${resultTotal.substring(0,1)} ${resultTotal.substring(1,4)} ${resultTotal.substring(4,7)}`;
+				break;
+			}
+			default: {
+				groupPrice = resultTotal;
+			}
+		}
+		return groupPrice;
+	}
+
+	$('.card-count__minus').click(function() {
+		let count = $(this).attr("count");
+		$.ajax({
+			type: "POST",
+			url: "../include/count-minus.php",
+			data: "id="+count,
+			cache: false,
+			success: data => {
+				$("#input-id" + count).val(data)
+
+				let priceProduct = $("#product"+count).attr("price")
+
+				let resultTotal = Number(priceProduct) * Number(data)
+
+				$("#product"+count).html(resultTotal + " руб.")
+				
+				totalPrice()
+			}
+		})
+	})
+
+	$('.card-count__plus').click(function() {
+		let count = $(this).attr("count");
+
+		$.ajax({
+			type: "POST",
+			url: "../include/count-plus.php",
+			data: "id="+count,
+			cache: false,
+			success: data => {
+				$("#input-id" + count).val(data)
+
+				let priceProduct = $("#product"+count).attr("price")
+
+				let resultTotal = Number(priceProduct) * Number(data)
+
+				$("#product"+count).html(resultTotal + " руб.")
+				
+				totalPrice()
+			}
+		})
+	})
+
+	$('.count-input').keypress(function(e){
+		if (e.keyCode === 13) {
+			let count = $(this).attr("count")
+			let inCount = $("#input-id"+count).val()
+
+			$.ajax({
+				type: "POST",
+				url: "../include/count-input.php",
+				data: "id="+count+"&count="+inCount,
+				dataType: "html",
+				cache: false,
+				success: data => {
+
+					$("input-id"+count).val(data)
+					
+					let priceProduct = $("#product"+count).attr("price")
+
+					let resultTotal = Number(priceProduct) * Number(data)
+
+					$("#product"+count).html(resultTotal + " руб.")
+					
+					totalPrice()
+				}
+			})
 		}
 	})
+
+	function totalPrice() {
+		$.ajax({
+			type: "POST",
+			url: "../include/total-price.php",
+			dataType: "html",
+			cache: false,
+			success: data => {
+				$('.cart-total__price').html(data)
+			}
+		})
+	}
 
 })
 

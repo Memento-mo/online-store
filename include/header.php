@@ -155,11 +155,11 @@
             </ul>
 
             <div class="cart d-flex align-items-center">
-                <div class="cart-image">
-                    <img src="../img/icons/cart.svg" alt="cart" class="cart-image__img">
-                </div>
                 <div class="cart-title">
                     <a href="../cart.php?action=oneclick" class="cart-link">Корзина</a>
+                </div>
+                <div class="cart-image ml-2">
+                    <img src="../img/icons/cart.svg" alt="cart" class="cart-image__img">
                 </div>
             </div>
         </div>

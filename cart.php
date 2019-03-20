@@ -136,13 +136,13 @@
                                                 <p class="card-text cart-text_size">'.$row["mini_description"].'</p>
                                             </div>
                                             <div class="card-count card-count_indents">
-                                                <div class="card-count__minus">-</div>
+                                                <div class="card-count__minus" count="'.$row["cart_id"].'">-</div>
                                                 <div class="card-count__input">
-                                                    <input class="count-input" maxlength="3" type="text" value="'.$row["cart_count"].'"/>
+                                                    <input id="input-id'.$row["cart_id"].'" class="count-input" count="'.$row["cart_id"].'" maxlength="3" type="text" value="'.$row["cart_count"].'"/>
                                                 </div>
-                                                <div class="card-count__plus">+</div>
+                                                <div class="card-count__plus" count="'.$row["cart_id"].'">+</div>
                                             </div>
-                                            <div class="product-price__count product-price__count_indents">'.$int.'</div>
+                                            <div id="product'.$row["cart_id"].'" class="product-price__count product-price__count_indents" price="'.$row["cart_price"].'">'.$int.' руб.</div>
                                         </div>
                                         <div class="cart-delete">
                                             <a href="cart.php?id='.$row["cart_id"].'&action=delete"><img src="./img/icons/cancel.svg" alt="delete" class="cart-delete"></a>
@@ -282,6 +282,18 @@
                         
                     break;
                 case 'completion':
+                    $result = mysql_query("SELECT * FROM cart, table_products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND table_products.products_id = cart.cart_id_products", $link);
+    
+                    if (mysql_num_rows($result) > 0) {
+                        $row = mysql_fetch_array($result);
+
+                        do {
+
+                            $int = $row["cart_price"] * $row["cart_count"];
+                            $all_price = $all_price + $int;
+
+                        } while ($row = mysql_fetch_array($result));
+                    }
                     echo '
                         <div class="cart-container mt-3">
                             <div class="d-flex cart-info">
@@ -341,7 +353,7 @@
 
                     echo '
                         <div class="total-price">
-                            <div class="cart-total__price mb-3">Итого: '.$total_price.' руб.</div>
+                            <div class="cart-total__price mb-3">Итого: '.$all_price.' руб.</div>
                             <button class="btn btn-success">Оплатить</button>
                         </div>
                     </div>
@@ -409,29 +421,28 @@
                             $int = $row["cart_price"] * $row["cart_count"];
                             $all_price = $all_price + $int;
                             echo '
-
-                            <div class="mb-3 mt-3">    
-                                <div class="card-user card_hover cart-size">
-                                    <img class="card-img-top card-img-top-user" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
-                                    <div class="card-body-user d-flex align-items-center">
-                                        <div class="card-body-user__text">
-                                            <h5 class="card-title">'.$row["title"].'</h5>
-                                            <p class="card-text cart-text_size">'.$row["mini_description"].'</p>
-                                        </div>
-                                        <div class="card-count card-count_indents">
-                                            <div class="card-count__minus">-</div>
-                                            <div class="card-count__input">
-                                                <input class="count-input" maxlength="3" type="text" value="'.$row["cart_count"].'"/>
+                                <div class="mb-3 mt-3">    
+                                    <div class="card-user card_hover cart-size">
+                                        <img class="card-img-top card-img-top-user" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
+                                        <div class="card-body-user d-flex align-items-center">
+                                            <div class="card-body-user__text">
+                                                <h5 class="card-title">'.$row["title"].'</h5>
+                                                <p class="card-text cart-text_size">'.$row["mini_description"].'</p>
                                             </div>
-                                            <div class="card-count__plus">+</div>
+                                            <div class="card-count card-count_indents">
+                                                <div class="card-count__minus" count="'.$row["cart_id"].'">-</div>
+                                                <div class="card-count__input">
+                                                    <input id="input-id'.$row["cart_id"].'" class="count-input" count="'.$row["cart_id"].'" maxlength="3" type="text" value="'.$row["cart_count"].'"/>
+                                                </div>
+                                                <div class="card-count__plus" count="'.$row["cart_id"].'">+</div>
+                                            </div>
+                                            <div id="product'.$row["cart_id"].'" class="product-price__count product-price__count_indents" price="'.$row["cart_price"].'">'.$int.' руб.</div>
                                         </div>
-                                        <div class="product-price__count product-price__count_indents">'.$int.'</div>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="cart.php?id='.$row["cart_id"].'&action=delete"><img src="./img/icons/cancel.svg" alt="delete" class="cart-delete"></a>
+                                        <div class="cart-delete">
+                                            <a href="cart.php?id='.$row["cart_id"].'&action=delete"><img src="./img/icons/cancel.svg" alt="delete" class="cart-delete"></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             ';
                         } while ($row = mysql_fetch_array($result));
 
