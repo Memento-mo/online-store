@@ -62,6 +62,7 @@ if(listIcon && tileIcon) {
 addEvents(checkbox)
 
 $(document).ready(function() {
+	
 	$('.dropdown-toggle').dropdown()
 
 		$("#block-user-name").click(() => {
@@ -133,5 +134,47 @@ $(document).ready(function() {
 
 		e.preventDefault();
 	})
+
+
+	$('.button-user-list, .button-user-tile').click(function(){
+		let tid = $(this).attr('tid');
+
+		$.ajax({
+			type: "POST",
+			url: "../include/addtocart.php",
+			data: "id=" + tid,
+			dataType: "html",
+			cache: false
+		})
+
+		const funGroupPrice = intPrice => {
+			let resultTotal = String(intPrice);
+			let lenStr = resultTotal.length;
+
+			switch(lenStr) {
+				case 4: {
+					groupPrice = `${resultTotal.substring(0,1)} ${resultTotal.substring(1,4)}`;
+					break;
+				}
+				case 5: {
+					groupPrice = `${resultTotal.substring(0,2)} ${resultTotal.substring(2,5)}`;
+					break;
+				}
+				case 6: {
+					groupPrice = `${resultTotal.substring(0,3)} ${resultTotal.substring(3,6)}`;
+					break;
+				}
+				case 7: {
+					groupPrice = `${resultTotal.substring(0,1)} ${resultTotal.substring(1,4)} ${resultTotal.substring(4,7)}`;
+					break;
+				}
+				default: {
+					groupPrice = resultTotal;
+				}
+			}
+			return groupPrice;
+		}
+	})
+
 })
 

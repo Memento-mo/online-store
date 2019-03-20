@@ -38,7 +38,7 @@
             $int = $row["cart_price"] * $row["cart_count"];
         } while ($row = mysql_fetch_array($result));
 
-        $total_price = $int;
+        $total_price = $total_price + $int;
     }
 ?>
 

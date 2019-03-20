@@ -159,7 +159,7 @@
                     <img src="../img/icons/cart.svg" alt="cart" class="cart-image__img">
                 </div>
                 <div class="cart-title">
-                    <a href="../cart.php?action=oneclick" class="cart-link">Корзина пустая</a>
+                    <a href="../cart.php?action=oneclick" class="cart-link">Корзина</a>
                 </div>
             </div>
         </div>

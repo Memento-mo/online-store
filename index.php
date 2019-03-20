@@ -1,5 +1,6 @@
 <?php 
     include("include/db_connect.php");
+    include("./functions/functions.php");
     session_start();
     include("./include/auth_cookie.php");
 
@@ -36,7 +37,7 @@
 <body>
     <header class="header">
         <?php
-            include("./include/header.php")
+            include("./include/header.php");
         ?>
     </header>
     <main>
@@ -97,8 +98,8 @@
                                                 <h5 class="card-title">'.$row["title"].'</h5>
                                                 <p class="card-text">'.$row["mini_description"].'</p>
                                                 <div class="product-price">
-                                                    <div class="product-price__count">'.$row["price"].' руб.</div>
-                                                    <a href="#" class="btn btn-primary">В корзину</a>
+                                                    <div class="product-price__count">'.group_numerals($row["price"]).' руб.</div>
+                                                    <button class="btn btn-primary button-user-tile" tid="'.$row["products_id"].'">В корзину</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,8 +163,8 @@
                                                 <h5 class="card-title">'.$row["title"].'</h5>
                                                 <p class="card-text">'.$row["mini_description"].'</p>
                                                 <div class="product-price-user">
-                                                    <div class="product-price__count">'.$row["price"].' руб.</div>
-                                                    <a href="#" class="btn btn-primary button-user">В корзину</a>
+                                                    <div class="product-price__count">'.group_numerals($row["price"]).' руб.</div>
+                                                    <button class="btn btn-primary button-user button-user-list" tid="'.$row["products_id"].'">В корзину</button>
                                                 </div>
                                                 
                                             </div>

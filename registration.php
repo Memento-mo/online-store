@@ -36,14 +36,15 @@
                 $address = htmlspecialchars($_POST['address']);
                 $phone = htmlspecialchars($_POST['phone']);
                 $country = htmlspecialchars($_POST['country']);
+                $ip = $_SERVER['REMOTE_ADDR'];
                 $query = mysql_query("SELECT * FROM reg_users WHERE username='".$username."'");
                 $numrows = mysql_num_rows($query);
 
                 if($numrows == 0) {
 
                     $sql="INSERT INTO reg_users
-                        (full_name, email, username, password, address, phone, country)
-                        VALUES('$full_name','$email', '$username', '$password', '$address', '$phone', '$country')";
+                        (full_name, email, username, password, address, phone, ip, country)
+                        VALUES('$full_name','$email', '$username', '$password', '$address', '$phone', '$ip', '$country')";
 
                     $result=mysql_query($sql);
 
