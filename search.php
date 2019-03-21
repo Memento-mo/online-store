@@ -99,7 +99,7 @@
                                             <div class="card card_hover" style="width: 18rem;">
                                                 <img class="card-img-top card_size" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">'.$row["title"].'</h5>
+                                                    <a class="card-title-link" href="view-content.php?id='.$row["products_id"].'"><h5 class="card-title">'.$row["title"].'</h5></a>
                                                     <p class="card-text">'.$row["mini_description"].'</p>
                                                     <div class="product-price">
                                                         <div class="product-price__count">'.$row["price"].' руб.</div>
@@ -167,7 +167,7 @@
                                         <div class="card-user card_hover" style="width: 44rem; height: 209px">
                                             <img class="card-img-top card-img-top-user" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
                                             <div class="card-body-user">
-                                                <h5 class="card-title">'.$row["title"].'</h5>
+                                                <a class="card-title-link" href="view-content.php?id='.$row["products_id"].'"><h5 class="card-title">'.$row["title"].'</h5></a>
                                                 <p class="card-text">'.$row["mini_description"].'</p>
                                                 <div class="product-price-user">
                                                     <div class="product-price__count">'.$row["price"].' руб.</div>

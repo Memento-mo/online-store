@@ -6,6 +6,7 @@
 @import './_intropage.css';
 @import './_profile.css';
 @import './_cart.css';
+@import './_view-content.css';
 
 li {
     list-style: none;
@@ -14,6 +15,14 @@ li {
 
 body {
     font-family: "Open Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .sorts-item {

@@ -60,6 +60,8 @@ if(listIcon && tileIcon) {
 }
 
 addEvents(checkbox)
+ 
+
 
 $(document).ready(function() {
 	
@@ -260,4 +262,5 @@ $(document).ready(function() {
 	}
 
 })
+
 

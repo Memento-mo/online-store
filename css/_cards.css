@@ -134,3 +134,7 @@
     position: relative;
     left: 21%;
 }
+
+.card-title-link:hover {
+    text-decoration: none;
+}
