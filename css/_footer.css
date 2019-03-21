@@ -29,3 +29,9 @@
     margin-left: 105px;
     margin-top: 50px;
 }
+
+@media screen and (max-width: 768px) {
+    .footer_indents {
+        margin-left: 56px;
+    }
+}

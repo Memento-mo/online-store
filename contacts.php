@@ -22,7 +22,7 @@
         ?>
     </header>
     <main class="container">
-        <p class="mt-5"><strong>CONTACTS</strong></p>
+        <p class="mt-5"><strong>Контакты</strong></p>
     </main>
 
     <footer class="footer mt-3">

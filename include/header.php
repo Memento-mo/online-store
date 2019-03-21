@@ -154,7 +154,7 @@
                 </li>
             </ul>
 
-            <div class="cart d-flex align-items-center">
+            <div class="cart d-flex align-items-center cart-position">
                 <div class="cart-title">
                     <a href="../cart.php?action=oneclick" class="cart-link">Корзина</a>
                 </div>

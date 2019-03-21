@@ -28,7 +28,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Главная</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -163,7 +163,7 @@
                                                 <a class="card-title-link" href="view-content.php?id='.$row["products_id"].'"><h5 class="card-title">'.$row["title"].'</h5></a>
                                                 <p class="card-text">'.$row["mini_description"].'</p>
                                                 <div class="product-price-user">
-                                                    <div class="product-price__count">'.group_numerals($row["price"]).' руб.</div>
+                                                    <div class="product-price__count price-custom">'.group_numerals($row["price"]).' руб.</div>
                                                     <button class="btn btn-primary button-user button-user-list" tid="'.$row["products_id"].'">В корзину</button>
                                                 </div>
                                                 

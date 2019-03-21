@@ -91,7 +91,7 @@
 
                             <div class="cart-steps d-flex justify-content-between align-items-center mt-4">
                                 <div class="cart-steps__step">Шаг 1 из 3</div>
-                                <a href="cart.php?action=clear"><button class="btn btn-danger">Очистить</button></a>
+                                <a href="cart.php?action=clear"><button class="btn btn-danger btn-clear-size">Очистить</button></a>
                             </div>
                             <div class="line mt-2 mb-2"></div>
                         </div>
@@ -132,8 +132,8 @@
                                         <img class="card-img-top card-img-top-user" src="./img/products/'.$row["type_of_products"].'/'.$row["image"].'" alt="Card image cap">
                                         <div class="card-body-user d-flex align-items-center">
                                             <div class="card-body-user__text">
-                                                <h5 class="card-title">'.$row["title"].'</h5>
-                                                <p class="card-text cart-text_size">'.$row["mini_description"].'</p>
+                                                <h5 class="card-title cart-title_options">'.$row["title"].'</h5>
+                                                <p class="card-text cart-text_size cart-descr">'.$row["mini_description"].'</p>
                                             </div>
                                             <div class="card-count card-count_indents">
                                                 <div class="card-count__minus" count="'.$row["cart_id"].'">-</div>
@@ -188,7 +188,7 @@
 
                             <div class="cart-steps d-flex justify-content-between align-items-center mt-4">
                                 <div class="cart-steps__step">Шаг 2 из 3</div>
-                                <a href="cart.php?action=clear"><button class="btn btn-danger">Очистить</button></a>
+                                <a href="cart.php?action=clear"><button class="btn btn-danger btn-clear-size">Очистить</button></a>
                             </div>
                             <div class="line mt-2 mb-4"></div>
                         </div>
