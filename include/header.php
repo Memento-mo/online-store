@@ -7,16 +7,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">О нас</a>
+                    <a class="nav-link" href="../about-us.php">О нас</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Магазины</a>
+                    <a class="nav-link" href="../shops.php">Магазины</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Контакты</a>
+                    <a class="nav-link" href="../contacts.php">Контакты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Доставка и оплата</a>
+                    <a class="nav-link" href="../delivery.php">Доставка и оплата</a>
                 </li>
                 <?php
                     if($_SESSION['auth'] == 'yes_auth') {
